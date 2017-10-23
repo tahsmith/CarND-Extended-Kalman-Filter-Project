@@ -50,13 +50,13 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state)
     double vy = x_state(3);
 
     double rp2 = px * px + py * py;
-    if (rp2 == 0)
+    if (rp2 < 0.001)
     {
         std::cout << "warning: cannot evaluate jacobian at: (" << px << ", "
                   << py << ")." << std::endl;
         return Hj;
     }
-    float rp = sqrt(rp2);
+    double rp = sqrt(rp2);
 
     Hj <<
        px / rp, py / rp, 0, 0,
